@@ -1,24 +1,25 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+"use client";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import { Skeleton } from "@/components/skeleton";
+import { useSearchParams } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "devstore",
-};
+export default function SearchLoading() {
+  const searchParams = useSearchParams();
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+  const query = searchParams.get("q");
   return (
-    <html className={inter.variable} lang="pt">
-      <body className="bg-zinc-950 text-zinc-50 antialiased">{children}</body>
-    </html>
+    <div className="flex flex-col gap-4">
+      <p className="text-sm">
+        Resultados para:<span className="font-semibold">{query}</span>
+      </p>
+      <div className="grid grid-cols-3 gap-6">
+        <Skeleton className="h-[380px]" />
+        <Skeleton className="h-[380px]" />
+        <Skeleton className="h-[380px]" />
+        <Skeleton className="h-[380px]" />
+        <Skeleton className="h-[380px]" />
+        <Skeleton className="h-[380px]" />
+      </div>
+    </div>
   );
 }
